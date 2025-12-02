@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>For Arafat 💛</title>
+<style>
+body {
+    margin:0;
+    background: linear-gradient(135deg,#e8d9ff,#ffe8f3);
+    color:#333;
+    font-family:"Poppins",sans-serif;
+    overflow-x:hidden;
+    text-align:center;
+}
+/* Intro signature */
+#signature {
+    position: fixed;
+    top: 40%;
+    width:100%;
+    font-size:32px;
+    color:#ff4f9a;
+    opacity:0;
+    animation: glowFade 4s forwards;
+    font-weight:700;
+    text-shadow: 0 0 8px #ff4f9a, 0 0 16px #ffc2d1;
+}
+@keyframes glowFade {
+    0% { opacity:0; text-shadow: 0 0 0px #ff4f9a; transform: scale(0.8); }
+    30% { opacity:1; text-shadow: 0 0 15px #ff4f9a,0 0 25px #ffc2d1; transform: scale(1.05);}
+    70% { opacity:1; text-shadow: 0 0 10px #ff4f9a,0 0 20px #ffc2d1; transform: scale(1);}
+    100% { opacity:0; text-shadow: 0 0 0px #ff4f9a; transform: scale(0.8);}
+}
+
+#container {margin-top:130px;padding:20px;display:none;}
+#typedText {font-size:28px;color:#ff4f9a;font-weight:600;min-height:60px;margin-bottom:20px;}
+button {background:#ff4f9a;border:none;padding:12px 25px;color:white;border-radius:10px;font-size:18px;cursor:pointer;margin-top:25px;box-shadow:0 0 15px #ff4f9a88;transition:0.2s;}
+button:active {transform: scale(0.93);}
+.balloon {position:absolute;bottom:-120px;width:40px;height:55px;background:#ffb3d1;border-radius:50%;opacity:0.7;animation:floatUp 6s linear infinite;}
+@keyframes floatUp {from{transform:translateY(0);} to{transform:translateY(-120vh);}}
+.firefly {position:absolute;width:6px;height:6px;background:#fff8c4;border-radius:50%;opacity:0.8;animation:glow 2s infinite alternate;}
+@keyframes glow {from{opacity:0.2;transform:scale(0.7);} to{opacity:1;transform:scale(1.4);}}
+.heart {position:absolute;font-size:22px;animation:heartUp 1s linear forwards;}
+@keyframes heartUp {from{opacity:1;transform:translateY(0);} to{opacity:0;transform:translateY(-50px);}}
+#credit {margin-top:40px;font-size:15px;color:#444;opacity:0.8;}
+</style>
+</head>
+<body>
+
+<div id="signature">Made with love by Arafat ❤</div>
+
+<script>
+// Fireflies
+for(let i=0;i<30;i++){
+    let f=document.createElement("div");
+    f.classList.add("firefly");
+    f.style.left=Math.random()*window.innerWidth+"px";
+    f.style.top=Math.random()*window.innerHeight+"px";
+    f.style.animationDelay=Math.random()*2+"s";
+    document.body.appendChild(f);
+}
+
+// Balloons
+for(let i=0;i<8;i++){
+    let b=document.createElement("div");
+    b.classList.add("balloon");
+    b.style.left=Math.random()*window.innerWidth+"px";
+    b.style.background=["#ffc2d1","#ffd6a5","#caffbf","#bde0fe"][Math.floor(Math.random()*4)];
+    b.style.animationDuration=(5+Math.random()*4)+"s";
+    document.body.appendChild(b);
+}
+</script>
+
+<div id="container">
+    <div id="typedText"></div>
+    <button id="nextBtn" onclick="nextStep()">Next ➜</button>
+    <div id="credit">Created by ❤ Arafat</div>
+</div>
+
+<script>
+// Show main content after intro
+setTimeout(()=>{document.getElementById("container").style.display="block";},3800);
+
+// Typing effect
+function typeText(text,callback){
+    let i=0;
+    let speed=65;
+    let box=document.getElementById("typedText");
+    box.innerHTML="";
+    function type(){
+        if(i<text.length){box.innerHTML+=text.charAt(i);i++;setTimeout(type,speed);}
+        else{if(callback)callback();}
+    } type();
+}
+
+let step=0;
+let messages=[
+    "Hi Arafat! 🌟",
+    "I made something small for you...",
+    "Read this with a soft heart 💛...",
+    "good luck to your day and be the most valuable, happier, respected insan, ❤ kabhi dard na lena or na dena.",
+    "✨ Stay blessed, stay happy always Arafat ✨"
+];
+
+function nextStep(){
+    if(step<messages.length){typeText(messages[step]);step++;}
+    else{fireConfetti();document.getElementById("nextBtn").style.display="none";}
+}
+
+// Tap hearts
+document.addEventListener("click",function(e){
+    let h=document.createElement("div");
+    h.classList.add("heart");
+    h.innerHTML="❤";
+    h.style.left=e.pageX+"px";
+    h.style.top=e.pageY+"px";
+    document.body.appendChild(h);
+    setTimeout(()=>h.remove(),900);
+});
+
+// Confetti
+function fireConfetti(){
+    for(let i=0;i<60;i++){
+        let c=document.createElement("div");
+        c.innerHTML="🎉";
+        c.style.position="absolute";
+        c.style.left=Math.random()*window.innerWidth+"px";
+        c.style.top="-20px";
+        c.style.fontSize="25px";
+        c.style.animation="fall 2s linear forwards";
+        document.body.appendChild(c);
+        setTimeout(()=>c.remove(),2000);
+    }
+}
+document.body.innerHTML+=<style>@keyframes fall{from{transform:translateY(0);opacity:1;} to{transform:translateY(100vh);opacity:0;}}</style>;
+</script>
+</body>
+</html>
